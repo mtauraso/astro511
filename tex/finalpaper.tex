@@ -166,6 +166,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\graphicspath{{./}{figures/}}
+\graphicspath{ {../figures/} }
 %% This is the end of the preamble.  Indicate the beginning of the
 %% manuscript itself with \begin{document}.
 
@@ -244,7 +245,7 @@
 
 %% Mark off the abstract in the ``abstract'' environment. 
 \begin{abstract}
-With the unique and revolutionary measurements of the Gaia era affecting many areas of the study of the structure and history of the Milky Way, this paper looks at the parallax distances and explores the high level causes of spurious parallaxes in Gaia DR3, as well as summarizing some approaches for using these parallaxes and the astrometric solution as a whole to do science.
+With the unique and revolutionary measurements of the Gaia era affecting many areas of the study of the structure and history of the Milky Way, this paper looks at the parallax distances and explores the high level causes of spurious parallaxes in Gaia DR3, as well as exploring some approaches for using these parallaxes and the astrometric solution as a whole to measure distance.
 \end{abstract}
 
 %% Keywords should appear after the \end{abstract} command. 
@@ -272,9 +273,106 @@ With the unique and revolutionary measurements of the Gaia era affecting many ar
 
 \section{Introduction} \label{sec:intro}
 
-\latex\ \footnote{\url{http://www.latex-project.org/}} is a document markup
-language that is particularly well suited for the publication of
-mathematical and scientific articles \citep{jablonskaThere2022}. \cite{collaborationGaia2022}
+ESA's Gaia mission has been a boon to the study of the Milky Way. At time of writing Data Release 3 (DR3) has a publically searchable catalog of some $~1.8$ billion sources with $88\%$ of those having a high quality astrometric solution, and some $Y\%$ containing a published astrometric parallax with. In comparison with Gaia's predecessor sattellite, Hipparcos, this is an increase of $10x???$ in the number of sources, and a $x\%??$ increase in precision.
+
+The detailed study of the structure of the milky way benefits greatly from the enhanced precision of these parallax measures; however Gaia's astrometric parallaxes contain an estimated ($y\%???$) spurious astrometric solutions including ($z\%???$) negative valued parallaxes. The interpretation of these parallax values as distances is the subject of some study, and their presence is in some ways a commitment to a certain predictability in the structure of astrometric data processing, which has independent scientific value outside of the accuracy of the data themselves.
+
+Section \ref{sec:parallax} will sketch the process by which Gaia parallaxes are determined, and in Section \ref{sec:wrong} I will discuss some of the ways this process can lead to a erronious (or even negative) parallax.
+Section \ref{sec:data} will characterize the parallax values published in DR3, and section \ref{sec:distance} will sketch and compare efforts to derive distances from DR3 parallaxes. Section \ref{sec:improvement} will discuss improvements expected in Gaia's upcoming data release (DR4), as well as comparing DR3 with the prior major data release (DR2). Finally, Section \ref{sec:unorthodox} will conclude by summarizing an unorthodox use of the astrometric solution which are enabled by Gaia's data processing discipline.
+
+\section{How Gaia Does Parallax} \label{sec:parallax}
+
+The standard introductory treatment of parallax as the apex angle of a giant triangle subtended by two ends of the earth's orbit and a distant star, while pedagogically interesting and trigonometrically correct, pales in comparison to the complexity measuring nearly 2 billion parallaxes on a modern space telescope. The Gaia spacecraft sits in a Lissajous orbit at the Earth-Sun L2 Lagrange point. Gaia's two telescopes, separated by a basic angle shown in figure \ref{fig:scanninglaw}, scan the sky as the satellite rotates. As the telescope rotates, sources of light across the universe shine on to CCD detectors for each telescope as shown by the yellow star in figure \ref{fig:ccd}. The times of these transits and the response of the CCDs are recorded.
+
+\begin{figure}
+	\includegraphics[width=0.49\columnwidth]{scanninglaw.png} \includegraphics[width=0.49\columnwidth]{gaiaccd.png}
+	\caption{Gaia Scan illustration (left) and Gaia CCD schematic (right) \citep{collaborationGaia2016}}
+	 \label{fig:scanninglaw} \label{fig:ccd}
+\end{figure}
+
+The first steps of this analysis are focused on constructing a frame of reference for the astronomic observations and accurately placing the spacecraft and its instruments within that reference frame. Well known astronomic sources with predictable behavior are identified algorithmically and used as points of reference to calibrate detailed mathematial models of the spacecraft's location over time. Once this model of the spacecraft is calibrated, it is used to convert timed transit events to sky locations and times where a source was observed. The time that a source passes by each telescope is critical, because the time that each source appears and leaves the field of view of the spacecraft is an additional piece of information that allows its sky location to be inferred with greater accuracy
+
+These observations must then be grouped algorithmically, such that each group of observations is identified as being from the same source in the night sky. Parallaxes then flow from a least-squares fit of a linear model to each group of observations identified with a particular source. A simplified and simulated view of such a curve fit is shown in Figure \ref{fig:curvefit}. Each gaia source includes around 200 observations, and the published astrometric parameters, errors and correlations flow directly from this curve fit. The ``happy path'' for this pipeline is the 5-parameter fit, so called because the 5 astrometric parameters Right Ascension ($\alpha$), Declination ($\delta$), Right Ascension Proper Motion ($\mu_\alpha$), Declination Proper Motion ($\mu_\delta$) and Parallax ($\bar{\omega}$) are the output of the least squares fit.\citep{lindegrenGaia2021a}
+
+\begin{figure}
+	\includegraphics[width=\columnwidth]{astrometric-good.png}
+	\caption{A simplified but representative astrometric curve fit. Simulated star location is in blue, simulated measurements are in red, and the fit curve is orange. The error bars are of representative size to Gaia's data. Actual and fit parameters for proper motion and Parallax are reported on the plot. Simulation was generated by author with code from \cite{luriGaia2018}}
+	\label{fig:goodfit}
+\end{figure}
+
+
+There can be issues with the veracity of this fit though. Gaia's CCD instrument and telescope have non-linear response to different frequences of light, and it is well known that objects in the sky are not monochromatic. These two effects together affect the calibration of the instrument, because there are chromatic effects that affect where, when, and how much a given source is recorded on the CCD. Gaia corrects for these effects using a model that takes as input a single color, reported in the published data as \texttt{nu\_eff\_used\_in\_astrometry}. In the case where this color can be determined from spectral observations, and the resulting 5 parameter fit is of sufficiently high quality, the 5-parameter fit is reported.
+
+In the case that the 5-parameter fit is not high enough quality to be reported, Gaia Astrometry falls back to either a 6 parameter fit or a 2 parameter fit. The 6 parameter fit treats \texttt{nu\_eff\_used\_in\_astrometry} as an additional unknown taking part of the least squares fit. The value found by the curve fit is reported in the database as \texttt{pseudocolor}. Typically very bright and very dim sources require this treatement for different reasons. Dim sources because there is not enough light to determine their true color. Bright sources end up having a 6-parameter fit because their 5-parameter fit is uncertain as their light is washing out much of the positional precision that Gaia would otherwise have. 2-parameter fits (only $\alpha$ and $\delta$) are reported when neither 5-parameter nor 6-parameter fits reach the desired level of quality.
+
+\section{What can go wrong?} \label{sec:wrong}
+
+The process of source identification is possibly the most error-prone step in the entire astrometric pipeline, involving both components on-spacecraft that initially identify sources and a large amount of earthbound data analysis.
+% TODO, you bitched out on characterizing this in the preso beyond a laundry list You might need to expand here, or you could just write in a laundry list
+
+% Assuming the part above is written:
+In addition to source identification issues, there are astrophysical phenomena that can cause a correctly identified source to not fit the linear 5 parameter model. Some of these have a somewhat mean-reverting property to linear motion such as binary systems, gravitationally lensed sources, and sources with dark companions. Others, such as stellar close encounters, and exceptionally fast sources have motion that simply diverges from the underlying model. These types of systems can cause a low quality or even a spurious curve fit depending on the magnitude of the effect and the timing of observations. 
+
+Finally, even if source identification works and the star itself does move linearly over the observation timescale, you can still have a curve fit that is simply wrong. Many negative parallaxes fall into this category. Figure \ref{fig:badfit} shows a bad fit for a simulated star, yielding a negative parallax. 
+
+\begin{figure}
+	\includegraphics[width=\columnwidth]{astrometric-bad.png}
+	\caption{Same as figure \ref{fig:goodfit}, except the fit is to a negative parallax value. Note the orange curve (fit) differs from the blue (actual) by a phase of $\pi$. Figure generated from code in \cite{luriGaia2018}}
+	\label{fig:badfit}
+\end{figure}
+
+\begin{figure}
+	\includegraphics[width=\columnwidth]{spuriousfraction.png}
+	\caption{Fraction of Spurious Astrometric solutions for 5 and 6-parameter solutions in EDR3\citep{fabriciusGaia2021}}
+	\label{fig:spuriousfraction}
+\end{figure}
+
+
+
+
+\section{What data is in DR3?} \label{sec:data}
+
+\begin{figure}
+	\includegraphics[width=\columnwidth]{poe_map.png}
+	\caption{Heatmap of Gaia DR3 5 parameter solutions by \texttt{parallax\_over\_error} measure and $G$ magnitude. Lower plots show example normal distributions for parallax measurements implied by selected \texttt{parallax\_over\_error} values. These same selected values are marked on the main plot by the black vertical lines. Data from \cite{collaborationGaia2022}}
+	\label{fig:dr3poe}
+\end{figure}
+
+\section{Reasoning Distances from Parallax} \label{sec:distance}
+
+\begin{figure}
+	\includegraphics[width=0.8\columnwidth]{bailerjonesverification.png}
+	\caption{Comparison of Bailer Jones distances to other methods \citep{bailer-jonesEstimating2021}}
+	\label{fig:bailerjones}
+\end{figure}
+
+
+\section{Improvement efforts} \label{sec:improvement}
+
+\begin{figure}
+	\includegraphics[width=\columnwidth]{lmcDR2vsDR3.png}
+	\includegraphics[width=\columnwidth]{quasar.png}
+	\caption{Comparison of DR2 and EDR3 from \cite{lindegrenGaia2021a}}
+\end{figure}
+
+\begin{figure}
+	\includegraphics[width=\columnwidth]{parallaxvspropermotiondr2edr3.png}
+	\caption{Figure from \cite{fabriciusGaia2021}}
+\end{figure}
+
+\section{Unorthodox use of the astrometric solution} \label{sec:unorthodox}
+
+\begin{figure}
+	\includegraphics[width=\columnwidth]{microlensingpath.png}
+	\caption{Figure from \cite{jablonskaThere2022}}
+\end{figure}
+
+\begin{figure}
+	\includegraphics[width=\columnwidth]{microlensingsimMD.png}
+	\includegraphics[width=\columnwidth]{microlensingsimTheta.png}
+	\caption{Figure from \cite{jablonskaThere2022}}
+\end{figure}
+
 %% For this sample we use BibTeX plus aasjournals.bst to generate the
 %% the bibliography. The sample631.bib file was populated from ADS. To
 %% get the citations to show in the compiled file do the following:
