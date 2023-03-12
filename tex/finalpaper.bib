@@ -172,6 +172,21 @@
   file = {C\:\\Users\\mtaur\\Zotero\\storage\\VRKSZ3AE\\Luri et al. - 2018 - Gaia Data Release 2 using Gaia parallaxes.pdf}
 }
 
+@article{queirozStarHorse2018,
+  title = {{{StarHorse}}: A {{Bayesian}} Tool for Determining Stellar Masses, Ages, Distances, and Extinctions for Field Stars},
+  shorttitle = {{{StarHorse}}},
+  author = {Queiroz, A B A and Anders, F and Santiago, B X and Chiappini, C and Steinmetz, M and Dal Ponte, M and Stassun, K G and {da Costa}, L N and Maia, M A G and Crestani, J and Beers, T C and {Fern{\'a}ndez-Trincado}, J G and {Garc{\'i}a-Hern{\'a}ndez}, D A and {Roman-Lopes}, A and Zamora, O},
+  year = {2018},
+  month = may,
+  journal = {Monthly Notices of the Royal Astronomical Society},
+  volume = {476},
+  number = {2},
+  pages = {2556--2583},
+  doi = {10.1093/mnras/sty330},
+  abstract = {Understanding the formation and evolution of our Galaxy requires accurate distances, ages, and chemistry for large populations of field stars. Here, we present several updates to our spectrophotometric distance code, which can now also be used to estimate ages, masses, and extinctions for individual stars. Given a set of measured spectrophotometric parameters, we calculate the posterior probability distribution over a given grid of stellar evolutionary models, using flexible Galactic stellar-population priors. The code (called StarHorse) can accommodate different observational data sets, prior options, partially missing data, and the inclusion of parallax information into the estimated probabilities. We validate the code using a variety of simulated stars as well as real stars with parameters determined from asteroseismology, eclipsing binaries, and isochrone fits to star clusters. Our main goal in this validation process is to test the applicability of the code to field stars with known Gaia-like parallaxes. The typical internal precisions (obtained from realistic simulations of an APOGEE+Gaia-like sample) are \$\{\textbackslash simeq \} 8\textbackslash,\textbackslash,\textbackslash rm\{per\textbackslash,\textbackslash,cent\}\$ in distance, \$\{\textbackslash simeq \} 20\textbackslash,\textbackslash,\textbackslash rm\{per\textbackslash,\textbackslash,cent\}\$ in age,\,\$\{\textbackslash simeq \} 6\textbackslash,\textbackslash,\textbackslash rm\{per\textbackslash,\textbackslash,cent\}\$ in mass, and {$\simeq$} 0.04\,mag in AV. The median external precision (derived from comparisons with earlier work for real stars) varies with the sample used, but lies in the range of \$\{\textbackslash simeq \} [0,2]\textbackslash,\textbackslash,\textbackslash rm\{per\textbackslash,\textbackslash,cent\}\$ for distances, \$\{\textbackslash simeq \} [12,31]\textbackslash,\textbackslash,\textbackslash rm\{per\textbackslash,\textbackslash,cent\}\$ for ages, \$\{\textbackslash simeq \} [4,12]\textbackslash,\textbackslash,\textbackslash rm\{per\textbackslash,\textbackslash,cent\}\$ for masses, and {$\simeq$} 0.07\,mag for AV. We provide StarHorse distances and extinctions for the APOGEE DR14, RAVE DR5, GES DR3, and GALAH DR1 catalogues.},
+  file = {C\:\\Users\\mtaur\\Zotero\\storage\\Q6I6F73A\\Queiroz et al. - 2018 - StarHorse a Bayesian tool for determining stellar.pdf;C\:\\Users\\mtaur\\Zotero\\storage\\VNCKEY9D\\4848294.html}
+}
+
 @article{rybizkiClassifier2021,
   title = {A Classifier for Spurious Astrometric Solutions in {{Gaia EDR3}}},
   author = {Rybizki, Jan and Green, Gregory and Rix, Hans-Walter and {El-Badry}, Kareem and Demleitner, Markus and Zari, Eleonora and Udalski, Andrzej and Smart, Richard L. and Gould, Andrew},
@@ -181,4 +196,21 @@
   abstract = {The Gaia early Data Release 3 has delivered exquisite astrometric data for 1.47 billion sources, which is revolutionizing many fields in astronomy. For a small fraction of these sources, the astrometric solutions are poor, and the reported values and uncertainties may not apply. Before any analysis, it is important to recognize and excise these spurious results - this is commonly done by means of quality flags in the Gaia catalog. Here, we devise a means of separating 'good' from 'bad' astrometric solutions that is an order of magnitude cleaner than any single flag: 99.3\% pure and 97.3\% complete, as validated on our test data. We devise an extensive sample of manifestly bad astrometric solutions, with parallax that is negative at {$>$} 4.5 sigma; and a corresponding sample of presumably good solutions, including sources in HEALPix pixels on the sky that do not contain such negative parallaxes, and sources that fall on the main sequence in a color-absolute magnitude diagram. We then train a neural network that uses 17 pertinent Gaia catalog entries and information about nearby sources to discriminate between these two samples, captured in a single 'astrometric fidelity' parameter. A diverse set of verification tests shows that our approach works very cleanly, including for sources with positive parallaxes. The main limitations of our approach are in the very low-SNR and the crowded regime. Our astrometric fidelities for all of eDR3 can be queried via the Virtual Observatory, our code and data are public.},
   langid = {english},
   file = {C\:\\Users\\mtaur\\Zotero\\storage\\R88BITKB\\Rybizki et al. - 2021 - A classifier for spurious astrometric solutions in.pdf}
+}
+
+@article{rybizkiGaia2020,
+  title = {A {{Gaia Early DR3 Mock Stellar Catalog}}: {{Galactic Prior}} and {{Selection Function}}},
+  shorttitle = {A {{Gaia Early DR3 Mock Stellar Catalog}}},
+  author = {Rybizki, Jan and Demleitner, Markus and {Bailer-Jones}, Coryn and Tio, Piero Dal and {Cantat-Gaudin}, Tristan and Fouesneau, Morgan and Chen, Yang and Andrae, Ren{\'e} and Girardi, L{\'e}o and Sharma, Sanjib},
+  year = {2020},
+  month = may,
+  journal = {PASP},
+  volume = {132},
+  number = {1013},
+  pages = {074501},
+  publisher = {{The Astronomical Society of the Pacific}},
+  doi = {10.1088/1538-3873/ab8cb0},
+  abstract = {We present a mock stellar catalog, matching in volume, depth and data model the content of the planned Gaia early data release 3 (Gaia EDR3). We have generated our catalog (GeDR3mock) using galaxia, a tool to sample stars from an underlying Milky Way (MW) model or from N-body data. We used an updated Besan\c{c}on Galactic model together with the latest PARSEC stellar evolutionary tracks, now also including white dwarfs. We added the Magellanic clouds and realistic open clusters with internal rotation. We empirically modeled uncertainties based on Gaia DR2 (GDR2) and scaled them according to the longer baseline in Gaia EDR3. The apparent magnitudes were reddened according to a new selection of 3D extinction maps. To help with the Gaia selection function we provide all-sky magnitude limit maps in G and BP for a few relevant GDR2 subsets together with the routines to produce these maps for user-defined subsets. We supplement the catalog with photometry and extinctions in non-Gaia bands. The catalog is available in the Virtual Observatory (http://dc.g-vo.org/tableinfo/gedr3mock.main) and can be queried just like the actual Gaia EDR3 will be. We highlight a few capabilities of the Astronomy Data Query Language with educative catalog queries. We use the data extracted from those queries to compare GeDR3mock to GDR2, which emphasises the importance of adding observational noise to the mock data. Since the underlying truth, e.g., stellar parameters, is know in GeDR3mock, it can be used to construct priors as well as mock data tests for parameter estimation. All code, models and data used to produce GeDR3mock are linked and contained in galaxia\_wrap (https://github.com/jan-rybizki/Galaxia\_wrap), a python package, representing a fast galactic forward model, able to project MW models and N-body data into realistic Gaia observables.},
+  langid = {english},
+  file = {C\:\\Users\\mtaur\\Zotero\\storage\\BL8LBNNI\\Rybizki et al. - 2020 - A Gaia Early DR3 Mock Stellar Catalog Galactic Pr.pdf}
 }
