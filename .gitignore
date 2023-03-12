@@ -1,1 +1,4 @@
 data/
+.conda/
+.micromamba/
+.micromamba_*/
