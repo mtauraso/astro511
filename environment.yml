@@ -19,5 +19,6 @@ dependencies:
   - ipympl
   - plotly
   - ipywidgets
+  - nbconvert
   - pip:
     - galpy
