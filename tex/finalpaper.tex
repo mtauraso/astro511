@@ -274,6 +274,11 @@ With the unique and revolutionary measurements of the Gaia era affecting many ar
 
 \section{Introduction} \label{sec:intro}
 
+% TODO':
+% Proofreading pass
+% Fill in numbers in introduction (or rephrase to remove them)
+% Make sure all terms are introduced, especially gaia EDR3 and its cozy relationship with DR3 that results in so many comparisons being done against EDR3 astrometrics when we really mean DR3
+
 ESA's Gaia mission has been a boon to the study of the Milky Way. At time of writing Data Release 3 (DR3) has a publically searchable catalog of some $~1.8$ billion sources with $88\%$ of those having a high quality astrometric solution, and some $Y\%$ containing a published astrometric parallax. In comparison with Gaia's predecessor sattellite, Hipparcos, this is an increase of $10x???$ in the number of sources, and a $x\%??$ increase in precision.
 
 The detailed study of the structure of the milky way benefits greatly from the enhanced precision of these parallax measures; however Gaia's astrometric parallaxes contain an estimated ($y\%???$) spurious astrometric solutions including ($z\%???$) negative valued parallaxes. The interpretation of these parallax values as distances is the subject of some study, and their presence is in some ways a commitment to a certain predictability in the structure of astrometric data processing, which has independent scientific value outside of the accuracy of the data themselves.
@@ -282,7 +287,7 @@ Section \ref{sec:parallax} will sketch the process by which Gaia parallaxes are 
 %Section \ref{sec:data} will characterize the parallax values published in DR3, and 
 Section \ref{sec:distance} will sketch and compare efforts to derive distances from DR3 parallaxes. Section \ref{sec:improvement} will discuss improvements expected in Gaia's upcoming data release (DR4), as well as comparing DR3 with the prior major data release (DR2). Finally, Section \ref{sec:unorthodox} will conclude by summarizing an unorthodox use of the astrometric solution which are enabled by Gaia's data processing discipline.
 
-\section{How Gaia Does Parallax} \label{sec:parallax}
+\section{How Gaia Measures Parallax} \label{sec:parallax}
 
 The standard introductory treatment of parallax as the apex angle of a giant triangle subtended by two ends of the earth's orbit and a distant star, while pedagogically interesting and trigonometrically correct, pales in comparison to the complexity measuring nearly 2 billion parallaxes on a modern space telescope. The Gaia spacecraft sits in a Lissajous orbit at the Earth-Sun L2 Lagrange point. Gaia's two telescopes, separated by a basic angle shown in figure \ref{fig:scanninglaw}, scan the sky as the satellite rotates. As the telescope rotates, sources of light across the universe shine on to CCD detectors for each telescope as shown by the yellow star in figure \ref{fig:ccd}. The times of these transits and the response of the CCDs are recorded.
 
@@ -346,7 +351,7 @@ Spurious astrometric solutions can vary greatly in terms of quality. While every
 Figure \label{fig:dr3poe} shows a histogram of a randomly selected subset of Gaia DR3 sources. The lines show schematically how as one samples the diagram further and further to the left, the negative parallax is greater and relatively more certain, as illustrated by the normal distributions at the bottom of the figure. The brightness dependence of spurious parallaxes can clearly be seen in this diagram, as well as the prominence of negative parallaxes with high relative uncertainty. 
 
 
-\section{Reasoning Distances from Parallax} \label{sec:distance}
+\section{Distance from Parallax} \label{sec:distance}
 
 Researchers working on Gaia recommend that the issue of finding distances from negative and spurious parallax be treated as a full Baysean inference problem\citep{luriGaia2018}. The most well known of these is Bailer-Jones method\footnote{Bailer-Jones geometric and photogeometric distances for 1.4 billion EDR3 sources are accessible by adding ADQL resembling ``\texttt{...JOIN external.gaiaedr3\_distance as d USING (source\_id)...}'' to your Gaia archive query \citep{bailer-jonesEstimating2021}}. The most recent Bailer-Jones distances for EDR3 are calculated two ways, once using only a geometric prior, and also using a photogeometric prior. In comparison to other Bayesian methods, Bailer-Jones attempts to keep the priors simple and focused on the geometry of the sky, avoiding more complex prior assumptions that model stellar systems.
 
@@ -366,9 +371,9 @@ Figure \ref{fig:bailerjones} shows a comparison of Bailer-Jones distances derive
 	\label{fig:bailerjones}
 \end{figure}
 
-Ultimately Bayesian methods to improve parallax can only be as accurate as their priors and the information content of their likelihood. As a comparison to Bailer-Jones, Gaia Collaboration publishes distances derived through their General Stellar Parameterizer from Photometry (GSP-Phot)\footnote{GSP-Phot distances are available in the \texttt{distance\_gspphot} column of \texttt{gaiadr3.gaia\_source} and \texttt{gaiadr3.gaia\_source\_lite}. Additional GSP-Phot data can be found in the \texttt{gaiadr3.astrophysical\_parameters} table of the Gaia Archive}. GSP-Phot uses several priors derived from stellar models to predict stellar parameters, and then uses those stellar parameters to derive a distance. The distance itself is constrained by a geometric prior similar to the Bailer-Jones geometric prior above. This combination approach systematically underestimates distances, differing significantly from other methods past 3kpc. GSP-Phot distances do not have enough accuracy to map the Milky Way's spiral arms\citep{andraeGaia2022}.
+Ultimately Bayesian methods to improve parallax can only be as accurate as their priors and the information content of their likelihood. As a comparison to Bailer-Jones, Gaia Collaboration publishes distances derived through their General Stellar Parameterizer from Photometry (GSP-Phot)\footnote{GSP-Phot distances are available in the \texttt{distance\_gspphot} column of \texttt{gaiadr3.gaia\_source} and \texttt{gaiadr3.gaia\_source\_lite}. Additional GSP-Phot data can be found in the \texttt{gaiadr3.astrophysical\_parameters} table of the Gaia Archive}. GSP-Phot uses several priors derived from stellar models to predict stellar parameters, and then uses those stellar parameters to derive a distance. The distance itself is constrained by a geometric prior similar to the Bailer-Jones geometric prior above. This combination approach systematically underestimates distances, differing significantly from other methods past 3kpc. GSP-Phot distances do not have enough accuracy to map the Milky Way's spiral arms \citep{andraeGaia2022}.
 
-\section{Improvement efforts} \label{sec:improvement}
+\section{Improvement Efforts} \label{sec:improvement}
 
 Given the state of the art of Gaia parallax distances, What should we expect in the future? Source identification is the root cause of most spurious astrometric measurements, and therefore the most likely root cause of negative and spurious parallax distances. Given that the gaia catalog has ~1.8 billion sources, this is also an extremely time consuming problem. Gaia DR4 is expected to contain more than twice the observation time as Gaia DR3, which will help reduce uncertainty driven by source selection and fitting\citep{lindegrenGaia2021a}. Comparing Gaia DR3 to the prior release, DR2, yields some striking improvements in the quality of the astrometric solutions overall.
 \begin{figure}
@@ -378,30 +383,38 @@ Given the state of the art of Gaia parallax distances, What should we expect in 
 	\label{fig:compare}
 \end{figure}
 
-Figure \ref{fig:compare} shows a selection of parallaxes from the Large Magellenic Cloud (LMC) and of distant quasars, with negative parallaxes appearing in red. The reduction in the waffle pattern of systemic errors in the LMC view, as well as the overall reduction in red in both diagrams shows the striking difference that additional data collection can make. Researchers estimate that the sensitivity limits of the Gaia mission as a whole are still quite far off in Gaia DR3, and that in general uncertanties will be reduced by a factor of 0.7 for positions and parallaxes, and a factor of 0.35 for proper motions\citep{lindegrenGaia2021a}.
-
+Figure \ref{fig:compare} shows a selection of parallaxes from the Large Magellenic Cloud (LMC) and of distant quasars, with negative parallaxes appearing in red. The reduction in the waffle pattern of systemic errors in the LMC view, as well as the overall reduction in red in both diagrams shows the striking difference that additional data collection can make. Researchers estimate that the sensitivity limits of the Gaia mission as a whole are still quite far off in Gaia DR3, and that in general uncertanties will be reduced by a factor of 0.7 for positions and parallaxes, and a factor of 0.35 for proper motions\citep{lindegrenGaia2021a}. 
 \begin{figure}
 	\includegraphics[width=\columnwidth]{parallaxvspropermotiondr2edr3crop.png}
-	\caption{Figure from \cite{fabriciusGaia2021}}
+	\caption{Proper motion vs parallax for DR2 (top) and EDR3 (bottom) \cite{fabriciusGaia2021}.}
+	\label{fig:comparepm}
 \end{figure}
 
-
+The overall increase in quality of the astrometric solution between DR2 and DR3 can also be seen in the parallax and proper motions shown in figure \ref{fig:comparepm}. With parallax and proper motion coming out of the same curve fit, it is not uncommon for errors affecting one to affect the other. Figure \ref{fig:comparepm} shows the redistribution of negative parallax sources with high proper motion measured in DR2 to lower proper motion and positive parallax in EDR3. There is also a general reduction in spurious high proper motions solutions between DR2 and EDR3, corresponding to higher data quality.
 
 \section{Unorthodox use of the astrometric solution} \label{sec:unorthodox}
 
+The straightforward processing and curve fitting in the preparation of the astrometric values, while preserving spurious and obviously nonphysical values has a great deal of scientific value. From this data it is possible to see the effect of greater observation time on the instrument. It is also possible to prepare distance values that use even the spurious solutions to extract data about the universe. To the careful investigator, Gaia's willingness to publish their catalog while it is still in progress can enable some truly unorthodox uses of the astrometric parameters and their uncertanties.
+
 \begin{figure}
 	\includegraphics[width=\columnwidth]{microlensingpath.png}
-	\caption{Figure from \cite{jablonskaThere2022}}
+	\caption{Figure from \cite{jablonskaThere2022} showing the path of the lensed object in the sky perturbed from its linear motion by a lensing event.}
+	\label{fig:starpath}
 \end{figure}
+
+Researchers conjectured that the sky path of the brightest microlensing event in Gaia's database would have been altered by the lensing object as shown in figure \ref{fig:starpath} \citep{jablonskaThere2022} . In Gaia DR3 the input star locations to the astrometric pipeline are not published; however, this assumption was still validated using the astrometric parameters. \cite{jablonskaThere2022} also reports that their method allowed some limits to be placed on the mass ($M_L$), distance ($D_L$), and Einstein radius ($\theta_E$) of the lensing object. 
+
+\cite{jablonskaThere2022} simulated gaia astrometric processing of the lensing event. These simulations varied trajectories of both objects, distance of the lensing object from earth, and the mass of the lensing object. These simulations each output the 5 astrometric parameters gaia outputs, along with uncertainties. Comparing these simulated values to the real Gaia astrometry of the lensed object, they were able to derive limits on the lensing object's properties. The simulations are scatter plotted in figure \ref{fig:simulation}, where the colors represent inclusion of a subset of the simulations based on nearness of the simulated astrometric processing errors and values to the reported Gaia values \citep{jablonskaThere2022}. They ultimately concluded that the most likely scenario was that the lensing object was a previously unknown white dwarf of approximately $~1 M_\odot$ a little less than $1 kpc$ from earth.
 
 \begin{figure}
 	\includegraphics[width=\columnwidth]{microlensingsimMD.png}
 	\includegraphics[width=\columnwidth]{microlensingsimTheta.png}
-	\caption{Figure from \cite{jablonskaThere2022}}
+	\caption{Figure from \cite{jablonskaThere2022} showing one possible set of parameters for a lensing object narrowed down from several thousand simulations}
+	\label{fig:simulation}
 \end{figure}
 
 \begin{acknowledgements}
-I'd also like to thank Jim Davenport for a truly excellent and informative Galaxies class. The class reminded me of all the messy curiosity, drama, and general insanity that I appreciate about the sciences. I'd also like to thank Jake Kurlander for the first citation of my academic career, given shortly after the precursor presentation to this paper.
+Thanks to Jim Davenport for giving a truly excellent and informative Galaxies class that reminded me of all the messy curiosity, drama, and general insanity that I appreciate about the sciences. I'd also like to thank Jake Kurlander for the first citation of my academic career, given shortly after the precursor presentation to this paper. Thanks finally and most importantly to my wife Rose Maynes for her unending support of my academic endeavours.
 \end{acknowledgements}
 
 
