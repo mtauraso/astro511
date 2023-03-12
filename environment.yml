@@ -5,7 +5,7 @@ channels:
 dependencies:
   - astroquery
   - astropy
-  - numpy
+  - numpy <= 1.23.5
   - numba
   - holoviews
   - scipy
@@ -16,3 +16,8 @@ dependencies:
   - ipykernel
   - gsl
   - gala
+  - ipympl
+  - plotly
+  - ipywidgets
+  - pip:
+    - galpy
