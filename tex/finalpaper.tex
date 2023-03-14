@@ -27,7 +27,7 @@
 %%
 %% using aastex version 6.3
 %\documentclass[linenumbers]{aastex631}
-\documentclass[twocolumn]{aastex631}
+\documentclass[preprint2]{aastex631}
 
 
 %% The default is a single spaced, 10 point font, single spaced article.
@@ -279,17 +279,15 @@ With the unique and revolutionary measurements of the Gaia era affecting many ar
 % Fill in numbers in introduction (or rephrase to remove them)
 % Make sure all terms are introduced, especially gaia EDR3 and its cozy relationship with DR3 that results in so many comparisons being done against EDR3 astrometrics when we really mean DR3
 
-ESA's Gaia mission has been a boon to the study of the Milky Way. At time of writing Data Release 3 (DR3) has a publically searchable catalog of some $~1.8$ billion sources with $88\%$ of those having a high quality astrometric solution, and some $Y\%$ containing a published astrometric parallax. In comparison with Gaia's predecessor sattellite, Hipparcos, this is an increase of $10x???$ in the number of sources, and a $x\%??$ increase in precision.
+ESA's Gaia mission has been a boon to the study of the Milky Way. At time of writing Data Release 3 (DR3) has a publically searchable catalog of some $~1.8$ billion sources with $88\%$ of those having a high quality astrometric solution, and some $81\%$ containing a published astrometric parallax. In comparison with Gaia's predecessor sattellite, Hipparcos, this is over a $10^4$ fold increase in the number of sources, and over a $100$ fold increase in parallax precision \cite{perrymanHistory2012}
 
-The detailed study of the structure of the milky way benefits greatly from the enhanced precision of these parallax measures; however Gaia's astrometric parallaxes contain an estimated ($y\%???$) spurious astrometric solutions including ($z\%???$) negative valued parallaxes. The interpretation of these parallax values as distances is the subject of some study, and their presence is in some ways a commitment to a certain predictability in the structure of astrometric data processing, which has independent scientific value outside of the accuracy of the data themselves.
+The detailed study of the structure of the milky way benefits greatly from the enhanced precision of these parallax measures; however Gaia's astrometric parallaxes contain an estimated $3.04$ million parallaxes that are negative and known to high precision\footnote{\texttt{parallax\_over\_error < -5}}. These spurious astrometric solutions are more numerous than would be expected from the instrumentation precision of the spacecraft \cite{fabriciusGaia2021}. The interpretation of these parallax values as distances is the subject of some study. Their presence in the published Gaia data is in some ways a commitment to a certain predictability in the structure of astrometric data processing. This discipline has independent scientific value outside of the accuracy of the data released in DR3.
 
-Section \ref{sec:parallax} will sketch the process by which Gaia parallaxes are determined, and in Section \ref{sec:wrong} I will discuss some of the ways this process can lead to a erronious (or even negative) parallax.
-%Section \ref{sec:data} will characterize the parallax values published in DR3, and 
-Section \ref{sec:distance} will sketch and compare efforts to derive distances from DR3 parallaxes. Section \ref{sec:improvement} will discuss improvements expected in Gaia's upcoming data release (DR4), as well as comparing DR3 with the prior major data release (DR2). Finally, Section \ref{sec:unorthodox} will conclude by summarizing an unorthodox use of the astrometric solution which are enabled by Gaia's data processing discipline.
+In this paper, section \ref{sec:parallax} will sketch the process by which Gaia parallaxes are determined, and section \ref{sec:wrong} will discuss some of the ways this process can lead to a erronious (or even negative) parallax. Section \ref{sec:distance} will sketch and compare efforts to derive distances from DR3 parallaxes. Section \ref{sec:improvement} will discuss improvements expected in Gaia's upcoming data release (DR4), as well as comparing DR3 with the prior major data release (DR2). Finally, Section \ref{sec:unorthodox} will conclude by summarizing an unorthodox use of the astrometric solution which is enabled by Gaia's data processing discipline.
 
 \section{How Gaia Measures Parallax} \label{sec:parallax}
 
-The standard introductory treatment of parallax as the apex angle of a giant triangle subtended by two ends of the earth's orbit and a distant star, while pedagogically interesting and trigonometrically correct, pales in comparison to the complexity measuring nearly 2 billion parallaxes on a modern space telescope. The Gaia spacecraft sits in a Lissajous orbit at the Earth-Sun L2 Lagrange point. Gaia's two telescopes, separated by a basic angle shown in figure \ref{fig:scanninglaw}, scan the sky as the satellite rotates. As the telescope rotates, sources of light across the universe shine on to CCD detectors for each telescope as shown by the yellow star in figure \ref{fig:ccd}. The times of these transits and the response of the CCDs are recorded.
+The standard introductory treatment of parallax considers the apex angle of a giant triangle subtended by two ends of the earth's orbit and a distant star. While pedagogically interesting and trigonometrically correct, this view pales in comparison to the complexity measuring parallaxes for nearly 2 billion sources detectable from a modern space telescope. The Gaia spacecraft sits in a Lissajous orbit at the Earth-Sun L2 Lagrange point. Gaia's two telescopes, separated by a basic angle shown in figure \ref{fig:scanninglaw}, scan the sky as the satellite rotates. As the telescope rotates, sources of light across the universe shine on to CCD detectors for each telescope as shown by the yellow star in figure \ref{fig:ccd}. The times of these transits and the response of the CCDs are recorded.
 
 \begin{figure}
 	\includegraphics[width=0.49\columnwidth]{scanninglaw.png} \includegraphics[width=0.49\columnwidth]{gaiaccd.png}
@@ -322,7 +320,7 @@ The process of source identification is possibly the most error-prone step in th
 In addition to source identification issues, there are astrophysical phenomena that can cause a correctly identified source to not fit the linear 5 parameter model. Some of these have a somewhat mean-reverting property to linear motion such as binary systems, gravitationally lensed sources, and sources with dark companions. Others, such as stellar close encounters, and exceptionally fast sources have motion that simply diverges from the underlying model. These types of systems can cause a low quality or even a spurious curve fit depending on the magnitude of the effect and the timing of observations. The distribution of these different sorts of fits, as well as the fraction of them that are spurious are illustrated in Figure \ref{fig:spuriousfraction}. 
 \begin{figure}
 	\includegraphics[width=0.56\columnwidth]{spuriousfraction.png}
-	\includegraphics[width=0.43\columnwidth]{magdistEDR3.png}
+	\includegraphics[width=0.42\columnwidth]{magdistEDR3.png}
 
 	\caption{Left: Estimated fraction of spurious astrometric solutions by type in EDR3 \citep{fabriciusGaia2021}. Right: Total number of astrometric solutions by type in EDR3 by $G$ magnitude \citep{lindegrenGaia2021a}.}
 	\label{fig:spuriousfraction}
